@@ -54,8 +54,16 @@
 
             // Escreva o seu código abaixo:
 
+            if ($idade < 18) {
+              echo "Acesso Negado";
+            } elseif (($idade >= 18)&&($bilhete == "vip")) {
+              echo "Acesso Vip Liberado";
+            } elseif (($idade >= 18)&&($bilhete == "pista")) {
+              echo "Acesso Pista Liberado";
+            } else {
+              echo "Erro Desconhecido";
 
-
+          }
           }
           ?>
         </div>
