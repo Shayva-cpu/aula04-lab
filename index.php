@@ -23,9 +23,14 @@
               <div class="mb-3">
                 <label class="form-label">Tipo de Bilhete</label>
                 <select class="form-select" name="tipoBilhete">
+                  
                   <option value="pista">Pista Padrão</option>
                   <option value="vip">Camarote VIP</option>
                 </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Qual o cupom?</label>
+                <input type="text" class="form-control" name="Cupom-Super-Legal" >
               </div>
               <button type="submit" class="btn btn-dark w-100">Validar Entrada</button>
             </form>
@@ -44,6 +49,7 @@
             // 1. RECOLHA DE DADOS (O "Input" do utilizador)
             $idade = $_POST['idadeUsuario'];
             $bilhete = $_POST['tipoBilhete'];
+            $cupom = $_POST['Cupom-Super-Legal'];
 
             echo "<h4>Resultado da Validação:</h4>";
 
@@ -56,9 +62,9 @@
 
             if ($idade < 18) {
               echo "Acesso Negado";
-            } elseif (($idade >= 18)&&($bilhete == "vip")) {
+            } elseif ((($idade >= 18)&&($bilhete == "vip"||$cupom == 'Cupom-Super-Legal'))) {
               echo "Acesso Vip Liberado";
-            } elseif (($idade >= 18)&&($bilhete == "pista")) {
+            } elseif ((($idade >= 18)&&($bilhete == "pista"))) {
               echo "Acesso Pista Liberado";
             } else {
               echo "Erro Desconhecido";
