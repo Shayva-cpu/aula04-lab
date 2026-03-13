@@ -26,6 +26,7 @@
                   
                   <option value="pista">Pista Padrão</option>
                   <option value="vip">Camarote VIP</option>
+                  <option value="camarote">Camarote Mais Legal</option>
                 </select>
               </div>
               <div class="mb-3">
@@ -60,17 +61,33 @@
 
             // Escreva o seu código abaixo:
 
-            if ($idade < 18) {
+             if ($idade < 18) {
               echo "Acesso Negado";
-            } elseif ((($idade >= 18)&&($bilhete == "vip"||$cupom == 'Cupom-Super-Legal'))) {
-              echo "Acesso Vip Liberado";
-            } elseif ((($idade >= 18)&&($bilhete == "pista"))) {
-              echo "Acesso Pista Liberado";
-            } else {
-              echo "Erro Desconhecido";
+            }
+             else {
+              switch ($bilhete){
+                case 'camarote':
+                  echo "Acesso Camarote";
+                  break;
+                case 'vip':
+                  echo "Acesso VIP";
+                  break;
+                case 'pista':
+                  if ($cupom == 'Cupom-Super-Legal')
+                   
+                    {
+                    echo "VIP Liberado"; }
+                    elseif ($cupom !== 'Cupom-Super-Legal')
+                      { echo "Cupom Inválido"; }
+                  else {
+                      echo "Pista Liberada"; }
+                    break;
+                  default: echo "Bilhete Inválido";
+                  break;
+                  }
+              }
 
-          }
-          }
+            }
           ?>
         </div>
       </div>
