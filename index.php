@@ -9,7 +9,7 @@
 
 <body class="bg-light">
   <div class="container mt-5">
-    <h2 class="mb-4 text-center">🎫 Sistema de Controlo de Acesso</h2>
+    <h2 class="mb-4 text-center">🎫 Sistema de Geração de Bilhetes Super Épico</h2>
 
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -30,10 +30,15 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label class="form-label">Qual o cupom?</label>
+                <label class="form-label">Quantidade de Bilhetes (Máx 10)</label>
+                <input type="number" class="form-control" name="quantidade" value="1" min="1" max="10"
+                required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Qual o cupom?(Opcional)</label>
                 <input type="text" class="form-control" name="Cupom-Super-Legal" >
               </div>
-              <button type="submit" class="btn btn-dark w-100">Validar Entrada</button>
+              <button type="submit" class="btn btn-dark w-100">Gerar Bilhetes</button>
             </form>
           </div>
         </div>
@@ -50,6 +55,7 @@
             // 1. RECOLHA DE DADOS (O "Input" do utilizador)
             $idade = $_POST['idadeUsuario'];
             $bilhete = $_POST['tipoBilhete'];
+            $quantidadeDesejada = (int)$_POST['quantidade'];
             $cupom = $_POST['Cupom-Super-Legal'];
 
             echo "<h4>Resultado da Validação:</h4>";
@@ -65,6 +71,7 @@
               echo "Acesso Negado";
             }
              else {
+            /*
               switch ($bilhete){
                 case 'camarote':
                   echo "Acesso Camarote";
@@ -85,9 +92,39 @@
                   default: echo "Bilhete Inválido";
                   break;
                   }
-              }
+                  */
+                $nomeSetor = '';
+                switch ($bilhete) {
+                  case 'vip':
+                    $nomeSetor = 'Camarote VIP';
+                    break;
+                  case 'pista':
+                    if ($cupom === 'Cupom-Super-Legal') {
+                      $nomeSetor = 'Pista (UPGRADE VIP)';
+                    } else {
+                      $nomeSetor = 'Pista Pedrão';
+                    }
+                    break;
 
-            }
+                    }
+                  echo "<h5>Imprimindo {$quantidadeDesejada} bilhete(s) para: {$nomeSetor}</h5>";
+                  echo '<ul class="list-group mb-3 shadow-sm">';
+
+                  $bilheteAtual = 1;
+
+                  while ($bilheteAtual <= $quantidadeDesejada) {
+                    echo "<li class='list-group-item'>";
+                    echo "Bilhete #{$bilheteAtual} (Cód: " . rand(1000, 9999) . ")";
+                    echo "</li>";
+
+                    $bilheteAtual++;
+                  }
+                    echo '</ul>';
+                    echo '<div class="alert alert-sucess fw-bold"> Lote Gerado Com Sucesso!</div>';
+                    
+                }
+                  }
+              
           ?>
         </div>
       </div>
