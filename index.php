@@ -31,14 +31,14 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Quantidade de Bilhetes (Máx 10)</label>
-                <input type="number" class="form-control" name="quantidade" value="1" min="1" max="10"
+                <input type="number" class="form-control" name="quantidade" value="1" min="1" max="100"
                 required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Qual o cupom?(Opcional)</label>
                 <input type="text" class="form-control" name="Cupom-Super-Legal" >
               </div>
-              <button type="submit" class="btn btn-dark w-100">Gerar Bilhetes</button>
+              <button type="submit" class="btn btn-dark w-100">Gerar Bilhetes Super Épicos</button>
             </form>
           </div>
         </div>
@@ -98,18 +98,22 @@
                   case 'vip':
                     $nomeSetor = 'Camarote VIP';
                     break;
+                  case 'camarote':
+                    $nomeSetor = 'Camarote Muito Legal';
+                    break;
                   case 'pista':
                     if ($cupom === 'Cupom-Super-Legal') {
                       $nomeSetor = 'Pista (UPGRADE VIP)';
                     } else {
-                      $nomeSetor = 'Pista Pedrão';
+                      $nomeSetor = 'Pista Padrão';
                     }
                     break;
 
                     }
                   echo "<h5>Imprimindo {$quantidadeDesejada} bilhete(s) para: {$nomeSetor}</h5>";
                   echo '<ul class="list-group mb-3 shadow-sm">';
-
+                  
+                  /*
                   $bilheteAtual = 1;
 
                   while ($bilheteAtual <= $quantidadeDesejada) {
@@ -121,7 +125,59 @@
                   }
                     echo '</ul>';
                     echo '<div class="alert alert-sucess fw-bold"> Lote Gerado Com Sucesso!</div>';
+                    */
+                  
+                  for ($bilheteAtual = 1; $bilheteAtual <= $quantidadeDesejada; $bilheteAtual++) {
                     
+                    if ($bilheteAtual > 10) {
+                        echo "<div class='alert alert-danger mt-2'> Limite de Segurança! Impressão Abortada. </div>";
+                        break;
+                    }
+
+                    if ($bilheteAtual == 3) {
+                        echo "<li class='list-group-item list-group-item-warning'> Bilhete #3 Amassado. Pulando...</li>";
+                        continue;
+                    }                  
+
+                    echo "<li class='list-group-item d-flex justify-content-between align-items-center'>";
+                    echo "Bilhete #{$bilheteAtual} <small class='text-muted'>(Cód: " . rand(1000, 9999) . ")
+                    </small>";
+                    echo "<span class='badge bg-sucess rounded-pill'>Impresso</span>";
+                    echo "</li>";
+                                        
+                  }
+
+                  echo '</ul>';
+
+                  if ($bilhete === 'camarote') {
+                    echo "<h5 class='mt-4'> Brindes Tops Liberados</h5>";
+
+                    $brindes = ["Foto do Manuel Gomes", "Copo Neon (Que Não Brilha)", "Paçoquinha Mordida", "Um Ps5 Novinho", "Chinelo Havaianas Edição Ilimitada", "Kit de 30 Copos Descartáeis", "Um Gato Alcolátra"];
+
+                    echo "<ul class='list-group mb-3 shadow-sm'>";
+
+                    foreach ($brindes as $item) {
+                      echo "<li class='list-group-item list-group-item-info'> Parabéns, Você Ganhou: {$item}</li>";
+                    } 
+                    
+                    echo "</ul>";
+                    
+                  }
+                  
+                  if ($cupom = 'Just Monika') {
+                    echo "<h5 class='mt-4'> Brindes Muito Épicos Liberados</h5>";
+
+                    $brindescupom = ["A Monalisa Real", "Kit de 20 Copos", "Uma Figure da Monika", "Uma Guitarra Muito Daora"];
+
+                    echo "<ul class='list-group mb-3 shadow-sm'>";
+
+                    foreach ($brindescupom as $itenscupom) {
+                      echo "<li class='list-group-item list-group-item-info'> Parabéns, Você Ganhou: {$itenscupom}</li>";
+                    }
+                                        
+                  }
+
+                    echo "</ul>";       
                 }
                   }
               
